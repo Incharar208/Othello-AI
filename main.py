@@ -4,7 +4,7 @@ import othello
 
 BLOCK_SIZE = 60
 PADDING_SIZE = 15
-WINDOW_WIDTH = BLOCK_SIZE * 8
+WINDOW_WIDTH = BLOCK_SIZE * 8 
 WINDOW_HEIGHT = BLOCK_SIZE * 8 + 20
 FRAME_PER_SECOND = 40
 
@@ -97,8 +97,10 @@ class Game_Engine(object):
 		menu = pygame.Rect(0, 8 * BLOCK_SIZE, WINDOW_WIDTH, 20)
 		pygame.draw.rect(self.screen, (224, 240, 243), menu)
 		self.menuFont = pygame.font.SysFont("comicsansms", 15)
-		self.drawText("Restart", self.menuFont, self.screen, WINDOW_WIDTH / 2 - 80, 8 * BLOCK_SIZE - 1, (0, 0, 0))
-		self.drawText("Exit", self.menuFont, self.screen, WINDOW_WIDTH / 2 + 20, 8 * BLOCK_SIZE - 1, (0, 0, 0))
+		self.drawText("Restart", self.menuFont, self.screen, WINDOW_WIDTH / 2 - 200, 8 * BLOCK_SIZE - 1, (0, 0, 0))
+		self.drawText("Exit", self.menuFont, self.screen, WINDOW_WIDTH / 2 + 160, 8 * BLOCK_SIZE - 1, (0, 0, 0))
+		#self.drawText('Black:' + str(self.game.blackTiles), self.menuFont, self.screen, WINDOW_WIDTH / 2 - 80, 8 * BLOCK_SIZE - 1, (0, 0, 0))
+		#self.drawText('White:' + str(self.game.whiteTiles), self.menuFont, self.screen, WINDOW_WIDTH / 2 + 20, 8 * BLOCK_SIZE - 1, (0, 0, 0))
 
 		# draw blocks and tiles
 		for row in range(0, 8):
@@ -114,6 +116,7 @@ class Game_Engine(object):
 					pass
 				else:
 					sys.exit('Error occurs - player number incorrect!')
+		
 		
 		# game ending check
 		if self.game.victory == -1:
