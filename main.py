@@ -99,8 +99,7 @@ class Game_Engine(object):
 		self.menuFont = pygame.font.SysFont("comicsansms", 15)
 		self.drawText("Restart", self.menuFont, self.screen, WINDOW_WIDTH / 2 - 200, 8 * BLOCK_SIZE - 1, (0, 0, 0))
 		self.drawText("Exit", self.menuFont, self.screen, WINDOW_WIDTH / 2 + 160, 8 * BLOCK_SIZE - 1, (0, 0, 0))
-		#self.drawText('Black:' + str(self.game.blackTiles), self.menuFont, self.screen, WINDOW_WIDTH / 2 - 80, 8 * BLOCK_SIZE - 1, (0, 0, 0))
-		#self.drawText('White:' + str(self.game.whiteTiles), self.menuFont, self.screen, WINDOW_WIDTH / 2 + 20, 8 * BLOCK_SIZE - 1, (0, 0, 0))
+
 
 		# draw blocks and tiles
 		for row in range(0, 8):
@@ -116,7 +115,9 @@ class Game_Engine(object):
 					pass
 				else:
 					sys.exit('Error occurs - player number incorrect!')
-		
+
+		self.drawText('Black: ' + str(self.game.blackTiles), self.menuFont, self.screen, WINDOW_WIDTH / 2 - 80, 8 * BLOCK_SIZE - 1, (0, 0, 0))
+		self.drawText('White: ' + str(self.game.whiteTiles), self.menuFont, self.screen, WINDOW_WIDTH / 2 + 20, 8 * BLOCK_SIZE - 1, (0, 0, 0))
 		
 		# game ending check
 		if self.game.victory == -1:
@@ -163,6 +164,7 @@ class Game_Engine(object):
 
 			try:
 				self.game.playerMove(chessman_x, chessman_y)
+				self.game.updateCounts()
 			except othello.IllegalMove as e:
 				print("Illegal Move " + e.message)
 			except Exception as e:
