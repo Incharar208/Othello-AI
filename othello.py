@@ -102,6 +102,13 @@ class Othello(object):
 				# opponent can move, alternate between player 1 and 2
 				self.player = 3 - self.player
 				self.changed = True
+	# modification 1.1
+	def updateCounts(self):
+        # Count the number of whiteTiles and blackTiles on the board
+		white_count = sum(row.count(2) for row in self.board)
+		black_count = sum(row.count(1) for row in self.board)
+		self.whiteTiles = white_count
+		self.blackTiles = black_count
 
 	def moveCanBeMade(self, board, playerID):
 		movesFound = False
