@@ -119,19 +119,34 @@ class Game_Engine(object):
 		self.drawText('Black: ' + str(self.game.blackTiles), self.menuFont, self.screen, WINDOW_WIDTH / 2 - 80, 8 * BLOCK_SIZE - 1, (0, 0, 0))
 		self.drawText('White: ' + str(self.game.whiteTiles), self.menuFont, self.screen, WINDOW_WIDTH / 2 + 20, 8 * BLOCK_SIZE - 1, (0, 0, 0))
 		
-		# game ending check
-		if self.game.victory == -1:
-			self.drawText("Draw! " + str(self.game.whiteTiles) + ":" + str(self.game.blackTiles), self.font, self.screen, 50, 10, (224, 240, 243))
-		elif self.game.victory == 1:
-			if self.game.useAI:
-				self.drawText("You Won! " + str(self.game.blackTiles) + ":" + str(self.game.whiteTiles), self.font, self.screen, 50, 10, (224, 240, 243))
-			else:
-				self.drawText("Black Won! " + str(self.game.blackTiles) + ":" + str(self.game.whiteTiles), self.font, self.screen, 50, 10, (224, 240, 243))
-		elif self.game.victory == 2:
-			if self.game.useAI:
-				self.drawText("AI Won! " + str(self.game.whiteTiles) + ":" + str(self.game.blackTiles), self.font, self.screen, 50, 10, (224, 240, 243))
-			else:
-				self.drawText("White Won! " + str(self.game.whiteTiles) + ":" + str(self.game.blackTiles), self.font, self.screen, 50, 10,(224, 240, 243))
+		if self.game.victory in [-1, 1, 2]:
+		# Create a rectangle for the game result text
+			result_box = pygame.Rect(50, 200, WINDOW_WIDTH - 100, 100)
+
+			# Draw the rectangle for the game result text
+			pygame.draw.rect(self.screen, (255, 255, 255), result_box)  # White rectangle
+			pygame.draw.rect(self.screen, (0, 0, 0), result_box, 2)  # Black border
+
+			# Draw the game result text inside the rectangle
+			result_text = ''
+			if self.game.victory == -1:
+				result_text = "Draw! " + str(self.game.whiteTiles) + ":" + str(self.game.blackTiles)
+			elif self.game.victory == 1:
+				if self.game.useAI:
+					result_text = "You Won! " + str(self.game.blackTiles) + ":" + str(self.game.whiteTiles)
+				else:
+					result_text = "Black Won! " + str(self.game.blackTiles) + ":" + str(self.game.whiteTiles)
+			elif self.game.victory == 2:
+				if self.game.useAI:
+					result_text = "AI Won! " + str(self.game.whiteTiles) + ":" + str(self.game.blackTiles)
+				else:
+					result_text = "White Won! " + str(self.game.whiteTiles) + ":" + str(self.game.blackTiles)
+
+			# Render and draw the result text
+			result_font = pygame.font.SysFont("comicsansms", 30)
+			result_surface = result_font.render(result_text, True, (0, 0, 0))  # Black text
+			result_rect = result_surface.get_rect(center=result_box.center)
+			self.screen.blit(result_surface, result_rect.topleft)
 
 		# update display
 		pygame.display.update()
