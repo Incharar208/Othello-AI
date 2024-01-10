@@ -29,10 +29,10 @@ class Game_Engine(object):
 		self.font = pygame.font.SysFont("Helvetica", 56)
 
 		# set images
-		self.images['board'] = pygame.image.load('./board.png')
+		self.images['board'] = pygame.image.load('./Images/board.png')
 		self.images['board'] = pygame.transform.scale(self.images['board'] ,(WINDOW_WIDTH, WINDOW_HEIGHT))
-		self.images['black'] = pygame.image.load('./black.png')
-		self.images['white'] = pygame.image.load('./white.png')
+		self.images['black'] = pygame.image.load('./Images/black.png')
+		self.images['white'] = pygame.image.load('./Images/white.png')
 
 		self.drawBoard()
 
